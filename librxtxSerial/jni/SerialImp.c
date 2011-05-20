@@ -5106,7 +5106,8 @@ void throw_java_exception( JNIEnv *env, char *exc, char *foo, char *msg )
 	LEAVE( "throw_java_exception" );
 }
 
-#define  LOGINFO(x...)  __android_log_print(ANDROID_LOG_INFO,"GNU.IO",x)
+
+#define  LOGINFO(...)  __android_log_print(ANDROID_LOG_INFO,"GNU.IO",__VA_ARGS__)
 
 
 /*----------------------------------------------------------
@@ -5120,7 +5121,7 @@ void throw_java_exception( JNIEnv *env, char *exc, char *foo, char *msg )
 ----------------------------------------------------------*/
 void report_warning(char *msg)
 {
-	LOGINFO(msg );
+	LOGINFO( "%s", msg );
 #ifndef DEBUG_MW
 	// fprintf(stderr, msg);
 #else
@@ -5144,7 +5145,7 @@ void report_verbose(char *msg)
 	mexErrMsgTxt( msg );
 #else
 //	fprintf(stderr, msg);
-	LOGINFO(msg );
+	LOGINFO( "%s", msg );
 #endif /* DEBUG_MW */
 #endif /* DEBUG_VERBOSE */
 }
@@ -5160,7 +5161,7 @@ void report_verbose(char *msg)
 void report_error(char *msg)
 {
 #ifndef DEBUG_MW
-	LOGINFO(msg );
+	LOGINFO( "%s", msg );
 	// fprintf(stderr, msg);
 #else
 	mexWarnMsgTxt( msg );
@@ -5180,7 +5181,7 @@ void report(char *msg)
 {
 #ifdef DEBUG
 #	ifndef DEBUG_MW
-	        LOGINFO(msg );
+		LOGINFO( "%s", msg );
 	//	fprintf(stderr, msg);
 #	else
 		mexPrintf( msg );
