@@ -22,6 +22,8 @@ LOCAL_C_INCLUDES += \
 LOCAL_CFLAGS += \
 	 -fPIC
 
+LOCAL_LDLIBS := -llog
+
 LOCAL_PRELINK_MODULE := false
 LOCAL_SHARED_LIBRARIES := libdl  liblog
 
