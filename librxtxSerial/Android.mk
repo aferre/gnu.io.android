@@ -12,5 +12,5 @@ LOCAL_SDK_VERSION := current
 
 LOCAL_JNI_SHARED_LIBRARIES := librxtxSerial
 
-include $(BUILD_PACKAGE)
+# include $(BUILD_PACKAGE)
 include $(call all-makefiles-under,$(LOCAL_PATH))
