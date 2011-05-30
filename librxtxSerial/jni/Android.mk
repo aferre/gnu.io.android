@@ -7,7 +7,7 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := eng
 LOCAL_MODULE:= librxtxSerial
-
+LOCAL_LDLIBS := -llog
 
 LOCAL_SRC_FILES := \
 	fuserImp.c \
