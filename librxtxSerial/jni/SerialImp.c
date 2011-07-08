@@ -5137,7 +5137,7 @@ void report_warning(char *msg)
    exceptions:  none
    comments:
 ----------------------------------------------------------*/
-void report_verbose(char *msg)
+void report_verbose(const char *msg)
 {
 #ifdef DEBUG_VERBOSE
 #ifdef DEBUG_MW
@@ -6049,14 +6049,14 @@ get_java_environment
 		used to monitor for output buffer empty.
 ----------------------------------------------------------*/
 JNIEnv *get_java_environment(JavaVM *java_vm,  jboolean *was_attached){
-	void **env = NULL;
+	JNIEnv **env = NULL;
 	jint err_get_env;
 	if(java_vm == NULL) return (JNIEnv *) *env;
 	*was_attached = JNI_FALSE;
 
 	err_get_env = (*java_vm)->GetEnv(
 		java_vm,
-		env,
+		(void **) env,
 		JNI_VERSION_1_2
 	);
 	if(err_get_env == JNI_ERR) return NULL;

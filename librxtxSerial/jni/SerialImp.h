@@ -353,6 +353,7 @@ struct timeval snow, enow, seloop, eeloop;
 /* allow people to override the directories */
 /* #define USER_LOCK_DIRECTORY "/home/tjarvi/1.5/build" */
 #ifdef USER_LOCK_DIRECTORY
+#undef LOCKDIR
 #	define LOCKDIR USER_LOCK_DIRECTORY
 #endif /* USER_LOCK_DIRECTORY */
 
@@ -475,7 +476,7 @@ size_t get_java_var( JNIEnv *, jobject, char *, char * );
 jboolean is_interrupted( struct event_info_struct * );
 int send_event(struct event_info_struct *, jint, int );
 void dump_termios(char *,struct termios *);
-void report_verbose(char *);
+void report_verbose(const char *);
 void report_error(char *);
 void report_warning(char *);
 void report(char *);
