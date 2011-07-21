@@ -339,7 +339,7 @@ struct timeval snow, enow, seloop, eeloop;
 
 #endif /* DEBUG_TIMING */
 
-#define TRACE 
+// #define TRACE 
 #ifdef TRACE
 #define ENTER(x) report_verbose("entering "x" \n");
 #define LEAVE(x) report_verbose("leaving "x" \n");

@@ -3924,8 +3924,10 @@ int port_has_changed_fionread( struct event_info_struct *eis )
 	if( (rc != -1 && change) || (rc == -1 && eis->ret > 0) )
 		return( 1 );
 #else
+#ifdef TRACE
 	sprintf( message, "port_has_changed_fionread: change is %i\n", change );
 	report_verbose( message );
+#endif
 	if( change )
 		return( 1 );
 #endif /* __unixware__  || __sun__ */
@@ -3950,7 +3952,7 @@ void check_tiocmget_changes( struct event_info_struct * eis )
 	if( !eis ) return;
 	change  = eis->change;
 
-	report_verbose("entering check_tiocmget_changes\n");
+	ENTER("check_tiocmget_changes");
 	if( ioctl( eis->fd, TIOCMGET, &mflags ) )
 	{
 		report( "=======================================\n");
@@ -3976,7 +3978,7 @@ void check_tiocmget_changes( struct event_info_struct * eis )
 
 	if( eis )
 		eis->omflags = mflags;
-	report_verbose("leaving check_tiocmget_changes\n");
+	LEAVE("check_tiocmget_changes");
 }
 
 /*----------------------------------------------------------
