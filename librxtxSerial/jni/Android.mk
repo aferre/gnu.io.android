@@ -25,7 +25,8 @@ LOCAL_CFLAGS += \
 LOCAL_LDLIBS := -llog
 
 LOCAL_PRELINK_MODULE := false
-LOCAL_SHARED_LIBRARIES := libdl  liblog
+# LOCAL_SHARED_LIBRARIES := libdl  liblog
+LOCAL_LDLIBS := -ldl -llog
 
 include $(BUILD_SHARED_LIBRARY)
 

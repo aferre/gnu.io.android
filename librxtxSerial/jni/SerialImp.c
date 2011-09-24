@@ -3924,8 +3924,10 @@ int port_has_changed_fionread( struct event_info_struct *eis )
 	if( (rc != -1 && change) || (rc == -1 && eis->ret > 0) )
 		return( 1 );
 #else
+#ifdef TRACE
 	sprintf( message, "port_has_changed_fionread: change is %i\n", change );
 	report_verbose( message );
+#endif
 	if( change )
 		return( 1 );
 #endif /* __unixware__  || __sun__ */
@@ -3950,7 +3952,7 @@ void check_tiocmget_changes( struct event_info_struct * eis )
 	if( !eis ) return;
 	change  = eis->change;
 
-	report_verbose("entering check_tiocmget_changes\n");
+	ENTER("check_tiocmget_changes");
 	if( ioctl( eis->fd, TIOCMGET, &mflags ) )
 	{
 		report( "=======================================\n");
@@ -3976,7 +3978,7 @@ void check_tiocmget_changes( struct event_info_struct * eis )
 
 	if( eis )
 		eis->omflags = mflags;
-	report_verbose("leaving check_tiocmget_changes\n");
+	LEAVE("check_tiocmget_changes");
 }
 
 /*----------------------------------------------------------
@@ -5138,7 +5140,7 @@ void report_warning(char *msg)
    exceptions:  none
    comments:
 ----------------------------------------------------------*/
-void report_verbose(char *msg)
+void report_verbose(const char *msg)
 {
 #ifdef DEBUG_VERBOSE
 #ifdef DEBUG_MW
@@ -6050,14 +6052,14 @@ get_java_environment
 		used to monitor for output buffer empty.
 ----------------------------------------------------------*/
 JNIEnv *get_java_environment(JavaVM *java_vm,  jboolean *was_attached){
-	void **env = NULL;
+	JNIEnv **env = NULL;
 	jint err_get_env;
 	if(java_vm == NULL) return (JNIEnv *) *env;
 	*was_attached = JNI_FALSE;
 
 	err_get_env = (*java_vm)->GetEnv(
 		java_vm,
-		env,
+		(void **) env,
 		JNI_VERSION_1_2
 	);
 	if(err_get_env == JNI_ERR) return NULL;
