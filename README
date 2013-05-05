@@ -1,3 +1,6 @@
+
+If you have access to the lower layers of your Android system (rooted phone for instance), I advise against using this library. You are better off using socat and build a wrapper around socat.
+
 To build these sources, install the android NDK per the following instructions:
 http://developer.android.com/sdk/ndk/index.html
 
